@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Home</title>
+ <script type="text/javascript" charset="utf-8" src="cordova-2.9.0.js"></script>
+ <script type="text/javascript" charset="utf-8">
+
+
+    // Mostrar fichero html geolocalizacion
+    function abrirURL(url) 
+    {
+		window.location.href = url;		    
+	}
+<body>
+  <p align="left">A continuación le permitiremos conocer su coordenada
+  GPS<a href="modules.php?name=News&new_topic=26" title="Conocer coordenada" target="_blank"></a>
+  <p align="left">En modo hipervinculo: 
+  
+  <ul>
+    <li><a href="localizacion.html" title="Acceso a geolocalización 
+      del móvil">Geolocalizacion</a>.</li>       
+  </ul>
+  <p>En modo boton:</p>
+  <button onclick="abrirURL('localizacion.html');">Geolocalizacion</button><br>
+</body>

@@ -1,30 +1,84 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Ejemplo Geolocalizacion</title>
+<title>Pagina de Inicio</title>
 
  <script type="text/javascript" charset="utf-8" src="cordova-2.9.0.js"></script>
- <script type="text/javascript" charset="utf-8">
-
-
-    // Mostrar fichero html geolocalizacion
-    function abrirURL(url) 
-    {
+ <link rel="stylesheet" href="jquery.mobile-1.4.1.min.css" />
+ <script type="text/javascript" src="js/jquery-2.1.0.min.js"/></script>
+ <script type="text/javascript" src="js/jquery.mobile-1.4.1.min.js"></script>
+ <script type="text/javascript" charset="utf-8"></script>
+</head>
+<body> 
+ 
+<div data-role="page" id="inicio">
+ 
+	<div data-role="header">
+		<h1>Autenticacion de Usuario</h1>
+	</div>
+    
+	<div data-role="content">	
+		<form id="formulario" >
+      
+      			<label> Usuario </label>
+      			<input type="text" id="nombredeusuario" name="nombredeusuario">
+      
+      			<label> Password </label>
+     			<input type="password" id="clave" name="clave" >
+ 
+      			<input type="submit" value="Login" id="botonLogin">
+      
+    		</form>		
+	</div>
+	 
+</div>
+ 
+<div data-role="page" id="home">
+ 
+	<div data-role="header">
+		<h1>Bienvenido</h1>
+	</div>
+ 
+	<div data-role="content">	
+		<h2> Bienvenido a la aplicacion </h2>
+		<h3> Su usuario y password son válidos</h3>
+	</div>
+ 
+</div>
+<script>
+   // Mostrar fichero html home
+   function abrirURL(url) 
+   {
 		window.location.href = url;		    
 	}
-
+ 
+   $('#formulario').submit(function() { 
+   	
+  	 
+   	// recolecta los valores que inserto el usuario
+   	var datosUsuario = $("#nombredeusuario").val()
+   	var datosPassword = $("#clave").val()
+   	
+     	archivoValidacion = "http://revolucion.mobi/ejemplos/phonegap/envioFormulario/validacion_de_datos.php?jsoncallback=?"
+    
+   	$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
+   	.done(function(respuestaServer) {
+   		
+   		alert(respuestaServer.mensaje + "\nGenerado en: " + respuestaServer.hora + "\n" +respuestaServer.generador)
+   		
+   		if(respuestaServer.validacion == "ok"){
+   		  
+   		 	/// si la validacion es correcta, muestra la pantalla "home"
+   			$.mobile.changePage("home.html")
+   		  
+   		}else{
+   		  /// ejecutar una conducta cuando la validacion falla
+   		}
+     
+   	})
+   	return false;
+   })
+   	
 </script>
-</head>
-<body>
-  <p align="left">A continuación le permitiremos conocer su coordenada
-  GPS<a href="modules.php?name=News&new_topic=26" title="Conocer coordenada" target="_blank"></a>
-  <p align="left">En modo hipervinculo: 
-  
-  <ul>
-    <li><a href="localizacion.html" title="Acceso a geolocalización 
-      del móvil">Geolocalizacion</a>.</li>       
-  </ul>
-  <p>En modo boton:</p>
-  <button onclick="abrirURL('localizacion.html');">Geolocalizacion</button><br>
 </body>
 </html>
